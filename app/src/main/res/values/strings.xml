@@ -8,4 +8,25 @@
     <string name="task">Task</string>
     <string name="projectMayus">Project</string>
     <string name="create_an_action">CREATE AN ACTION</string>
+    <string name="projectMay">Project</string>
+    <string name="taskMay">Task</string>
+    <string name="description">Description</string>
+    <string name="name">Name</string>
+    <string name="max_duration">Max. Duration</string>
+    <string name="hours">Hours</string>
+    <string name="repeat">Repeat</string>
+    <string name="d">D</string>
+    <string name="s">S</string>
+    <string name="v">V</string>
+    <string name="j">J</string>
+    <string name="x">X</string>
+    <string name="m">M</string>
+    <string name="l">L</string>
+    <string name="to">To</string>
+    <string name="_13_00">13:00</string>
+    <string name="_12_00">12:00</string>
+    <string name="from">From</string>
+    <string name="accept">accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="Repeat1">Repeat</string>
 </resources>

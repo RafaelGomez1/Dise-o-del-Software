@@ -8,47 +8,374 @@
     tools:context="com.example.joans.timetracker.newAction">
 
     <LinearLayout
+        android:id="@+id/titleLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/titleCreation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:text="@string/create_an_action"
             android:textAlignment="center"
-            android:paddingBottom="10dp"
+            android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:paddingTop="10dp"
             tools:layout_editor_absoluteX="163dp"
             tools:layout_editor_absoluteY="66dp" />
 
-        <LinearLayout
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/radioLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingStart="81dp"
+            android:checkedButton="@+id/projectButt"
             android:orientation="horizontal"
-            tools:ignore="RtlSymmetry">
+            tools:ignore="UselessParent">
 
             <RadioButton
-                android:id="@+id/projectRadioButton"
+                android:id="@+id/projectButt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingEnd="30dp"
+                android:text="@string/projectMay"
+                android:textColor="@color/white"
+                tools:ignore="RtlSymmetry" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/blankSpace"
+                android:layout_width="40dp"
+                android:layout_height="1dp"
+                android:layout_weight="1">
+
+            </android.support.constraint.ConstraintLayout>
+
+            <RadioButton
+                android:id="@+id/taskButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/projectMayus"
-                android:textAlignment="viewStart" />
+                android:text="@string/taskMay"
+                android:textColor="@color/white" />
+        </RadioGroup>
 
-            <RadioButton
-                android:id="@+id/taskRadioButton"
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/basicData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="136dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/nameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/name"
+            android:inputType="textPersonName"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/descInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/description"
+            android:inputType="textMultiLine"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/maxDurLay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="236dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/maxDurText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingEnd="20dp"
+            android:text="@string/max_duration"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:ignore="RtlSymmetry" />
+
+        <EditText
+            android:id="@+id/maxDurInput"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/hours"
+            android:inputType="number"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/repeatLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="292dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/switchLay"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Switch
+                android:id="@+id/repeatSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/task"
-                android:textAlignment="viewStart" />
+                android:paddingBottom="10dp"
+                android:switchPadding="20dp"
+                android:text="@string/Repeat1"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:visibility="visible"
+                tools:checked="false" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/dias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/lunes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorBackground"
+                android:text="@string/l"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/martes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorBackground"
+                android:text="@string/m"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/miercoles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorBackground"
+                android:text="@string/x"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/jueves"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorBackground"
+                android:text="@string/j"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/viernes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorBackground"
+                android:text="@string/v"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/sabado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorBackground"
+                android:text="@string/s"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/domingo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorBackground"
+                android:text="@string/d"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                tools:ignore="ButtonStyle" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="380dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/fromText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingEnd="20dp"
+            android:text="@string/from"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:ignore="RtlSymmetry" />
+
+        <EditText
+            android:id="@+id/fromInput"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/_12_00"
+            android:inputType="time" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="424dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/toText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingEnd="40dp"
+            android:text="@string/to"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            tools:ignore="RtlSymmetry" />
+
+        <EditText
+            android:id="@+id/toInput"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/_13_00"
+            android:inputType="time" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/finalButtons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="520dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:id="@+id/space"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"></LinearLayout>
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="@string/cancel"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/acceptButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="@string/accept"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
