@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TimeTracker</string>
+    <string name="project">project</string>
+    <string name="tasks">tasks</string>
+    <string name="start">Start</string>
+    <string name="boton_para_crear_una_tarea">Boton para crear una tarea</string>
+    <string name="create_a_n_new_action">Create a \n new Action!</string>
+    <string name="task">Task</string>
+    <string name="projectMayus">Project</string>
+    <string name="create_an_action">CREATE AN ACTION</string>
+</resources>
