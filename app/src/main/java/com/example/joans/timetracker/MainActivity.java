@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         final Button projectbutton = (Button) findViewById(R.id.projectbutton);
         final Button taskbutton = (Button) findViewById(R.id.taskbutton);
         final ImageButton createButton = (ImageButton) findViewById(R.id.createbutton);
+        //final TextView text = (TextView) findViewById(R.id.textView);
 
         assert butoPerComensar != null;
         butoPerComensar.setOnClickListener(butoStartListener);

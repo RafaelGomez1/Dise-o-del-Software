@@ -57,6 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:checked="false"
                 android:paddingEnd="30dp"
                 android:text="@string/projectMay"
                 android:textColor="@color/white"
@@ -75,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:checked="false"
                 android:text="@string/taskMay"
                 android:textColor="@color/white" />
         </RadioGroup>
@@ -358,8 +360,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="horizontal"></LinearLayout>
-
         <Button
+
             android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -76,6 +76,6 @@
         android:text="@string/create_a_n_new_action"
         android:textAlignment="center"
         android:textSize="30sp"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
 </RelativeLayout>

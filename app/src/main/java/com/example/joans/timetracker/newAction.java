@@ -15,7 +15,6 @@ public class newAction extends AppCompatActivity {
     private boolean l = false, m= false, x=false, j= false, v= false, s= false ,d = false;
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_action);
@@ -48,7 +47,7 @@ public class newAction extends AppCompatActivity {
         cancelButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(newAction.this, MainActivity.class);
+                Intent intent = new Intent(newAction.this, LlistaActivitatsActivity.class);
                 startActivity(intent);
             }
         });

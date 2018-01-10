@@ -2,16 +2,33 @@ package com.example.joans.timetracker;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.media.Image;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.example.joans.timetracker.DadesActivitat;
+import com.example.joans.timetracker.GestorArbreActivitats;
+import com.example.joans.timetracker.R;
+import android.widget.Button;
+import android.support.design.widget.FloatingActionButton;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,31 +76,19 @@ import java.util.List;
  * @version 6 febrer 2012
  */
 
-public class LlistaActivitatsActivity extends AppCompatActivity {
+public class LlistaActivitatsActivity extends AppCompatActivity implements AdapterActivity.OnTascaClickedListener {
 
+    boolean projectSelected = true;
+    boolean taskSelected = false;
     /**
      * Nom de la classe per fer aparèixer als missatges de logging del LogCat.
      *
      * @see Log
      */
     private final String tag = this.getClass().getSimpleName();
-
-    /**
-     * Grup de vistes (controls de la interfase gràfica) que consisteix en un
-     * <code>TextView</code> per a cada activitat a mostrar.
-     */
-    private ListView arrelListView;
-
-    /**
-     * Adaptador necessari per connectar les dades de la llista de projectes i
-     * tasques filles del projecte pare actual, amb la interfase, segons el
-     * mecanisme estàndard d'Android.
-     * <p>
-     * Per tal de fer-lo servir, cal que la classe <code>DadesActivitat</code>
-     * tingui un mètode <code>toString</code> que retornarà l'string a mostrar
-     * en els TextView (controls de text) de la llista ListView.
-     */
-    private ArrayAdapter<DadesActivitat> aaAct;
+    String path = "/";
+    private AdapterActivity adapter;
+    String nomPareActual = "";
 
     /**
      * Llista de dades de les activitats (projectes i tasques) mostrades
@@ -91,16 +96,6 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
      */
     private List<DadesActivitat> llistaDadesActivitats;
 
-    /**
-     * Identificador del View les propietats del qual (establertes amb l'editor
-     * XML de la interfase gràfica) estableixen com es mostra cada un els items
-     * o elements de la llista d'activitats (tasques i projectes) referenciada
-     * per l'adaptador {@link #aaAct}. Si per comptes haguéssim posat
-     * <code>android.R.layout.simple_list_item_1</code> llavors fora la
-     * visualització per defecte d'un text. Ara la diferència es la mida de la
-     * tipografia.
-     */
-    private int layoutID = R.layout.textview_llista_activitats;
 
     /**
      * Flag que ens servirà per decidir fer que si premem el botó/tecla "back"
@@ -152,17 +147,18 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
                 ArrayList<DadesActivitat> llistaDadesAct =
                         (ArrayList<DadesActivitat>) intent
                                 .getSerializableExtra("llista_dades_activitats");
-                aaAct.clear();
-                for (DadesActivitat dadesAct : llistaDadesAct) {
-                    aaAct.add(dadesAct);
-                }
+                llistaDadesActivitats = llistaDadesAct;
+                nomPareActual = intent.getStringExtra("nom_pare_actual");
+                adapter.clear();
+                adapter.setItems(llistaDadesAct);
                 // això farà redibuixar el ListView
-                aaAct.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
                 Log.d(tag, "mostro els fills actualitzats");
             } else {
                 // no pot ser
                 assert false : "intent d'acció no prevista";
             }
+
         }
     }
 
@@ -246,7 +242,7 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
 
         // Crea el servei GestorArbreActivitats, si no existia ja. A més,
         // executa el mètode onStartCommand del servei, de manera que
-        // *un cop creat el servei* = havent llegit ja l'arbre si es el
+        // un cop creat el servei = havent llegit ja l'arbre si es el
         // primer cop, ens enviarà un Intent amb acció TE_FILLS amb les
         // dades de les activitats de primer nivell per que les mostrem.
         // El que no funcionava era crear el servei (aquí mateix o
@@ -291,89 +287,96 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
         Log.i(tag, "onCreate");
 
         setContentView(R.layout.activity_llista_activitats);
-        arrelListView = (ListView) this.findViewById(R.id.listViewActivitats);
-
+        RecyclerView recyclerView = (RecyclerView) this.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         llistaDadesActivitats = new ArrayList<DadesActivitat>();
-        //aaAct = new ArrayAdapter<DadesActivitat>(this, layoutID,
-        //        llistaDadesActivitats);
-        aaAct = new ArrayAdapter<DadesActivitat>(this, layoutID,
-                llistaDadesActivitats);
+        ImageButton addButton = (ImageButton) findViewById(R.id.addButt);
 
-        arrelListView.setAdapter(aaAct);
+        Button taskButton = (Button) findViewById(R.id.projectbutton);
+        Button projectButton = (Button) findViewById(R.id.taskButton);
 
-        // Un click serveix per navegar per l'arbre de projectes, tasques
-        // i intervals. Un long click es per cronometrar una tasca, si és que
-        // l'item clicat es una tasca (sinó, no es fa res).
 
-        arrelListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        assert addButton != null;
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(final AdapterView<?> arg0, final View arg1,
-                                    final int pos, final long id) {
-                Log.i(tag, "onItemClick");
-                Log.d(tag, "pos = " + pos + ", id = " + id);
+            public void onClick(View view) {
+                Intent intent = new Intent(LlistaActivitatsActivity.this, newAction.class);
+                startActivity(intent);
 
-                Intent inte = new Intent(LlistaActivitatsActivity.BAIXA_NIVELL);
-                inte.putExtra("posicio", pos);
-                sendBroadcast(inte);
-                if (llistaDadesActivitats.get(pos).isProjecte()) {
-                    sendBroadcast(new Intent(
-                            LlistaActivitatsActivity.DONAM_FILLS));
-                    Log.d(tag, "enviat intent DONAM_FILLS");
-                } else if (llistaDadesActivitats.get(pos).isTasca()) {
-                    startActivity(new Intent(LlistaActivitatsActivity.this,
-                            LlistaIntervalsActivity.class));
-                    // en aquesta classe ja es demanara la llista de fills
-                } else {
-                    // no pot ser!
-                    assert false : "activitat que no es projecte ni tasca";
-                }
             }
         });
 
-        // Un "long click" serveix per cronometrar, si es tracta d'una tasca.
-        // Si es un projecte, no fara res.
-        arrelListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(final AdapterView<?> arg0,
-                                           final View arg1, final int pos, final long id) {
-                Log.i(tag, "onItemLongClick");
-                Log.d(tag, "pos = " + pos + ", id = " + id);
+        adapter = new AdapterActivity();
+        recyclerView.setAdapter(adapter);
+        adapter.setOnTascaClickedListener(this);
 
-                if (llistaDadesActivitats.get(pos).isTasca()) {
-                    Intent inte;
-                    if (!llistaDadesActivitats.get(pos).isCronometreEngegat()) {
-                        inte = new Intent(
-                                LlistaActivitatsActivity.ENGEGA_CRONOMETRE);
-                        Log.d(tag, "enviat intent ENGEGA_CRONOMETRE de "
-                                + llistaDadesActivitats.get(pos).getNom());
-                    } else {
-                        inte = new Intent(
-                                LlistaActivitatsActivity.PARA_CRONOMETRE);
-                        Log.d(tag, "enviat intent PARA_CRONOMETRE de "
-                                + llistaDadesActivitats.get(pos).getNom());
-                    }
-                    inte.putExtra("posicio", pos);
-                    sendBroadcast(inte);
-                }
-                // si es un projecte, no fem res
+    }
 
-                // Important :
-                // "Programming Android", Z. Mednieks, L. Dornin,
-                // G. Meike, M. Nakamura, O'Reilly 2011, pag. 187:
-                //
-                // If the listener returns false, the event is dispatched
-                // to the View methods as though the handler did not exist.
-                // If, on the other hand, a listener returns true, the event
-                // is said to have been consumed. The View aborts any further
-                // processing for it.
-                //
-                // Si retornem false, l'event long click es tornat a processar
-                // pel listener de click "normal", fent que seguidament a
-                // ordenar el cronometrat passem a veure la llista d'intervals.
-                return true;
+    //Funcion que nos permite movernos de Proyecto -> Tarea y Tarea -> Intervalos
+    @Override
+    public void onItemClicked(int pos) {
+        Log.i(tag, "onItemClick");
+
+        Intent inte = new Intent(LlistaActivitatsActivity.BAIXA_NIVELL);
+        inte.putExtra("posicio", pos);
+        sendBroadcast(inte);
+
+        path += llistaDadesActivitats.get(pos).getNom()+"/";
+        //tascaPath.setText(path);
+        if (llistaDadesActivitats.get(pos).isProjecte()) {
+            sendBroadcast(new Intent(
+                    LlistaActivitatsActivity.DONAM_FILLS));
+            Log.d(tag, "enviat intent DONAM_FILLS");
+        } else if (llistaDadesActivitats.get(pos).isTasca()) {
+            startActivity(new Intent(LlistaActivitatsActivity.this,
+                    LlistaIntervalsActivity.class));
+            // en aquesta classe ja es demanara la llista de fills
+        } else {
+            // no pot ser!
+            assert false : "activitat que no es projecte ni tasca";
+        }
+    }
+    //Funcion que nos muerta un AlertDialog con la informacion de cada Actividad
+
+
+
+
+    //Funcion que nos enciende el cronometro de las tareas
+    @Override
+    public void onPlayClicked(int pos) {
+        Log.i(tag, "onItemLongClick");
+
+        if (llistaDadesActivitats.get(pos).isTasca()) {
+            Intent inte;
+            if (!llistaDadesActivitats.get(pos).isCronometreEngegat()) {
+                inte = new Intent(
+                        LlistaActivitatsActivity.ENGEGA_CRONOMETRE);
+                Log.d(tag, "enviat intent ENGEGA_CRONOMETRE de "
+                        + llistaDadesActivitats.get(pos).getNom());
+            } else {
+                inte = new Intent(
+                        LlistaActivitatsActivity.PARA_CRONOMETRE);
+                Log.d(tag, "enviat intent PARA_CRONOMETRE de "
+                        + llistaDadesActivitats.get(pos).getNom());
             }
-        });
+            inte.putExtra("posicio", pos);
+            sendBroadcast(inte);
+        }
+        // si es un projecte, no fem res
 
+        // Important :
+        // "Programming Android", Z. Mednieks, L. Dornin,
+        // G. Meike, M. Nakamura, O'Reilly 2011, pag. 187:
+        //
+        // If the listener returns false, the event is dispatched
+        // to the View methods as though the handler did not exist.
+        // If, on the other hand, a listener returns true, the event
+        // is said to have been consumed. The View aborts any further
+        // processing for it.
+        //
+        // Si retornem false, l'event long click es tornat a processar
+        // pel listener de click "normal", fent que seguidament a
+        // ordenar el cronometrat passem a veure la llista d'intervals.
     }
 
     /**
@@ -384,6 +387,8 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
      * servei, deso l'arbre (equivalent a parar totes les tasques que s'estiguin
      * cronometrant) i pleguem de la aplicació.
      */
+
+    //Volver atras
     @Override
     public final void onBackPressed() {
         Log.i(tag, "onBackPressed");
@@ -425,7 +430,7 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
      * @param savedInstanceState
      *            Bundle que de fet no es fa servir.
      *
-     * @see onConfigurationChanged
+     *
      */
     @Override
     public final void onRestoreInstanceState(final Bundle savedInstanceState) {
@@ -491,5 +496,9 @@ public class LlistaActivitatsActivity extends AppCompatActivity {
             Log.v(tag, newConfig.toString());
         }
     }
+
+
+
+
 
 }

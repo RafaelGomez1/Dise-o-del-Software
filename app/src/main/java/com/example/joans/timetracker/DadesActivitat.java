@@ -144,12 +144,12 @@ public class DadesActivitat implements Serializable {
         String str = nom;
         String strdurada;
         if (durada > 0) {
-            strdurada = hores + "h " + minuts + "m " + segons + "s";
+            strdurada = hores + ":" + minuts + ":" + segons;
         } else {
             strdurada = "0s";
         }
         str += " " + strdurada;
-        return str;
+        return strdurada;
     }
 
     // Getters
