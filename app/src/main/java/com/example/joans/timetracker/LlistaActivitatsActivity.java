@@ -293,8 +293,6 @@ public class LlistaActivitatsActivity extends AppCompatActivity implements Adapt
         llistaDadesActivitats = new ArrayList<DadesActivitat>();
         ImageButton addButton = (ImageButton) findViewById(R.id.addButt);
 
-        Button taskButton = (Button) findViewById(R.id.projectbutton);
-        Button projectButton = (Button) findViewById(R.id.taskButton);
 
 
         assert addButton != null;

@@ -11,35 +11,41 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:orientation="horizontal">
 
 
-        <Button
+        <TextView
             android:id="@+id/projectbutton"
-            android:layout_width="30dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
+            android:paddingLeft="60dp"
             android:gravity="center"
-            android:paddingLeft="130dp"
             android:text="Nom"
             android:textColor="@android:color/white"
             tools:ignore="ButtonStyle" />
 
-        <Button
+        <TextView
             android:id="@+id/taskbutton"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
             android:gravity="center_vertical"
-            android:paddingLeft="20dp"
-            android:background="@color/colorPrimary"
+            android:paddingLeft="40dp"
             android:text="Durada"
             android:textColor="@color/white"
             tools:ignore="ButtonStyle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark" />
 
     </LinearLayout>
     <android.support.v7.widget.RecyclerView

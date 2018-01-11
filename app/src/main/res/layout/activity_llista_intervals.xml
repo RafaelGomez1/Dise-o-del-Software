@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorBackground">
+        android:background="@color/colorPrimaryDark">
 
 
         <Space
@@ -54,5 +54,5 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@color/colorPrimary"></android.support.v7.widget.RecyclerView>
+        android:background="@color/colorBackground"></android.support.v7.widget.RecyclerView>
 </RelativeLayout>

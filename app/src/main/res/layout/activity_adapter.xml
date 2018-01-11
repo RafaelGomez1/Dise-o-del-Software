@@ -29,20 +29,6 @@
                 app:srcCompat="@mipmap/tasklogo" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/Itembutton"
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:contentDescription="PlayButton"
-                app:srcCompat="@mipmap/play" />
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/Information"
@@ -73,9 +59,28 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="13dp"
                 android:ems="10"
+                android:paddingLeft="20dp"
                 android:textColor="@color/white"
                 tools:text="00:00:00" />
         </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/Itembutton"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:contentDescription="PlayButton"
+                app:srcCompat="@mipmap/play" />
+        </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
