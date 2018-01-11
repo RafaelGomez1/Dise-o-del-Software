@@ -26,6 +26,7 @@ public class DadesInterval implements Serializable {
     /**
      * Necessari segons checkstyle.
      */
+    private Interval interv;
     private static final long serialVersionUID = 1L;
 
     /**
@@ -33,7 +34,7 @@ public class DadesInterval implements Serializable {
      * @see Interval
      */
     private Date dataInicial;
-
+    private boolean isRunning;
     /**
      * Data final d'un interval.
      * @see Interval
@@ -54,9 +55,11 @@ public class DadesInterval implements Serializable {
      *            l'interval
      */
     public DadesInterval(final Interval inter) {
+        interv = inter;
         dataInicial = inter.getDataInicial();
         dataFinal = inter.getDataFinal();
         durada = inter.getDurada();
+        isRunning = inter.getState();
     }
 
     /**
@@ -68,6 +71,20 @@ public class DadesInterval implements Serializable {
      *
      * @return nom i durada de la activitat, en format hores, minuts i segons.
      */
+    public final String horaInicial(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        String strdi = sdf.format(dataInicial);
+
+        return strdi;
+    }
+
+    public final String horaFinal(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        String strdj = sdf.format(dataFinal);
+
+        return  strdj;
+    }
+
     @Override
     public final String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
@@ -95,7 +112,7 @@ public class DadesInterval implements Serializable {
                 - segonsPerMinut * minuts);
         // String strdurada = Long.toString(durada);
         String strdurada = hores + "h " + minuts + "m " + segons + "s";
-        return strdi + "-->" + strdf + " = " + strdurada;
+        return strdurada;
     }
 
     // Getters
@@ -122,5 +139,8 @@ public class DadesInterval implements Serializable {
      */
     public final long getDurada() {
         return durada;
+    }
+
+    public boolean getState() {return this.interv.getState();
     }
 }

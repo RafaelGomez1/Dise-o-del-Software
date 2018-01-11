@@ -9,30 +9,35 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:orientation="horizontal"
-        android:id="@+id/linearLayout">
+        android:orientation="horizontal">
+
 
         <Button
             android:id="@+id/projectbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryDark"
-            android:text="@string/project"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:paddingLeft="130dp"
+            android:text="Nom"
             android:textColor="@android:color/white"
             tools:ignore="ButtonStyle" />
 
         <Button
             android:id="@+id/taskbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
             android:background="@color/colorPrimary"
-            android:text="@string/tasks"
+            android:text="Durada"
             android:textColor="@color/white"
             tools:ignore="ButtonStyle" />
 

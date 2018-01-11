@@ -9,7 +9,7 @@ public class Interval implements Observer, Serializable {
 	//private Long durada;
 	//private Date dataInicial;
 	//private Date dataFinal;
-	
+	private boolean isRunning;
 	private Periode periode = null;
 
 	public Periode getPeriode() {
@@ -26,7 +26,7 @@ public class Interval implements Observer, Serializable {
 		//durada = 0L;
 		//dataInicial = horaInicial;
 		//dataFinal = dataInicial;
-		
+		isRunning = false;
 		setPeriode(new Periode(horaInicial));
 	}
 
@@ -39,6 +39,9 @@ public class Interval implements Observer, Serializable {
 		//long incrementDurada = calculaDurada(dataFinal,horaActual);
 		periode.incrementaDurada(incrementDurada);
 		periode.setDataFinal(horaActual);
+		if(this.getTasca().isCronometreEngegat()) {
+		    isRunning = true;
+        } else isRunning = false;
 		//durada = periode.getDurada();
 		
 		//durada += incrementDurada;
@@ -66,7 +69,7 @@ public class Interval implements Observer, Serializable {
 	public long calculaDurada(Date data1, Date data2) {
 		return (long) (data2.getTime() - data1.getTime())/1000; // en segons
 	}
-	
+	public boolean getState() { return this.isRunning;}
 	public Date getDataInicial() {
 	    return periode.getDataInicial();
 	}
@@ -78,4 +81,7 @@ public class Interval implements Observer, Serializable {
     public long getDurada() {
         return periode.getDurada();
     }
+
+    public void stopInterval() { this.isRunning = false; }
+
 }

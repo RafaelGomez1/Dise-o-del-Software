@@ -7,6 +7,8 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -34,7 +36,8 @@ public class LlistaIntervalsActivity extends AppCompatActivity {
      * classe abstracta <code>List</code> per tal de fer servir aquest atribut
      * conjuntament amb un <code>Adapter</code> d'Android.
      */
-    private List<DadesInterval> llistaDadesIntervals;
+    private List<DadesInterval> llistaDadesInterval;
+    private IntervalAdapter intervaladapter;
 
     /**
      * Grup de vistes (controls de la interfase gràfica) que consisteix en un
@@ -90,12 +93,13 @@ public class LlistaIntervalsActivity extends AppCompatActivity {
         // Tot aquest mecanisme és anàleg al que trobem al onCreate
         // de LlistaActivitatsActivity.
         setContentView(R.layout.activity_llista_intervals);
-        intervalsListView = (ListView) this.findViewById(R.id.listViewIntervals);
 
-        llistaDadesIntervals = new ArrayList<DadesInterval>();
-        aaAct = new ArrayAdapter<DadesInterval>(this, layoutID,
-                llistaDadesIntervals);
-        intervalsListView.setAdapter(aaAct);
+        RecyclerView recyclerInterval = (RecyclerView) this.findViewById(R.id.recyclerInterval);
+        recyclerInterval.setLayoutManager(new LinearLayoutManager(this));
+
+        llistaDadesInterval = new ArrayList<DadesInterval>();
+        intervaladapter = new IntervalAdapter();
+        recyclerInterval.setAdapter(intervaladapter);
     }
 
     // Aquests són els "serveis" que demana aquesta classe
@@ -150,11 +154,9 @@ public class LlistaIntervalsActivity extends AppCompatActivity {
                 ArrayList<DadesInterval> llistaDadesInter =
                         (ArrayList<DadesInterval>) intent
                                 .getSerializableExtra("llista_dades_intervals");
-                aaAct.clear();
-                for (DadesInterval dadesInter : llistaDadesInter) {
-                    aaAct.add(dadesInter);
-                }
-                aaAct.notifyDataSetChanged();
+                intervaladapter.clear();
+                intervaladapter.setItems(llistaDadesInter);
+                intervaladapter.notifyDataSetChanged();
             }
             Log.i(tag, "final de onReceive LlistaIntervals");
         }

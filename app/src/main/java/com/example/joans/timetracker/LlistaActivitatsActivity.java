@@ -25,10 +25,11 @@ import android.widget.TextView;
 
 import com.example.joans.timetracker.DadesActivitat;
 import com.example.joans.timetracker.GestorArbreActivitats;
-import com.example.joans.timetracker.R;
+
 import android.widget.Button;
 import android.support.design.widget.FloatingActionButton;
 import android.widget.Toast;
+import com.example.joans.timetracker.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -337,11 +338,27 @@ public class LlistaActivitatsActivity extends AppCompatActivity implements Adapt
         }
     }
     //Funcion que nos muerta un AlertDialog con la informacion de cada Actividad
+    /*
+    @Override
+    public void OnSettingsClicked() {
+        Intent intent = new Intent(LlistaActivitatsActivity.this, newAction.class); //CAMBIAR POR SETTING.JAVA
+        startActivity(intent);
+    } */
 
+    public void onInfoClicked(int pos) {
 
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Nom:\n" + llistaDadesActivitats.get(pos).getNom() +"\n"
+                + "Descripció:\n"+llistaDadesActivitats.get(pos).getDescripcio()+ "\n"
+                + "Data Inicial:\n" + llistaDadesActivitats.get(pos).getDataInicial() +"\n"
+                + "Data Final:\n" + llistaDadesActivitats.get(pos).getDataFinal() + "\n"
+                + "Durada:\n" + llistaDadesActivitats.get(pos).getHores());
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
 
+    }
 
-    //Funcion que nos enciende el cronometro de las tareas
+    //Funcion utilizada para encender el cronometro en las tareas
     @Override
     public void onPlayClicked(int pos) {
         Log.i(tag, "onItemLongClick");

@@ -33,6 +33,7 @@ public class AdapterActivity extends RecyclerView.Adapter<AdapterActivity.TascaV
     public void onBindViewHolder(final TascaViewHolder holder, final int position) {
         final DadesActivitat dadesActivitat = items.get(position);
         if(dadesActivitat.isTasca()){
+            holder.typeButton.setImageDrawable(ContextCompat.getDrawable(holder.itemView.getContext(), R.mipmap.tasklogo));
             if(dadesActivitat.isCronometreEngegat()) {
                 holder.tascaPlay.setImageDrawable(ContextCompat.getDrawable(holder.itemView.getContext(), R.mipmap.pause));
 
@@ -41,12 +42,11 @@ public class AdapterActivity extends RecyclerView.Adapter<AdapterActivity.TascaV
 
             }
         }else{
-            holder.tascaPlay.setImageResource(android.R.color.transparent);
+            holder.typeButton.setImageDrawable(ContextCompat.getDrawable(holder.itemView.getContext(), R.mipmap.folder));
+            holder.tascaPlay.setImageDrawable(ContextCompat.getDrawable(holder.itemView.getContext(), R.color.transparent));
         }
-
-        holder.tascaTitol.setText(dadesActivitat.getNom()+ "\n" +dadesActivitat.getDataInicial());
-
-
+        holder.tascaSettings.setImageDrawable(ContextCompat.getDrawable(holder.itemView.getContext(), R.mipmap.info));
+        holder.tascaTitol.setText(dadesActivitat.getNom());
         holder.tascaTimer.setText(dadesActivitat.toString());
 
         holder.tascaPlay.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +57,12 @@ public class AdapterActivity extends RecyclerView.Adapter<AdapterActivity.TascaV
             }
         });
 
+        holder.tascaSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onTascaClickedListener.onInfoClicked(holder.getAdapterPosition());
+            }
+        });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,13 +97,17 @@ public class AdapterActivity extends RecyclerView.Adapter<AdapterActivity.TascaV
 
         TextView tascaTitol;
         ImageButton tascaPlay;
-        ImageButton tascaInfo;
+        ImageButton tascaSettings;
+        ImageButton typeButton;
         TextView tascaTimer;
+
 
 
         public TascaViewHolder(View itemView) {
             super(itemView);
 
+            tascaSettings = (ImageButton) itemView.findViewById(R.id.settingsButt);
+            typeButton = (ImageButton) itemView.findViewById(R.id.typeButton);
             tascaPlay = (ImageButton) itemView.findViewById(R.id.imageButton);
             tascaTitol = (TextView) itemView.findViewById(R.id.actionInfo);
             tascaTimer = (TextView) itemView.findViewById(R.id.durCount);
@@ -108,5 +118,6 @@ public class AdapterActivity extends RecyclerView.Adapter<AdapterActivity.TascaV
     public interface OnTascaClickedListener {
         void onItemClicked(int pos);
         void onPlayClicked(int pos);
+        void onInfoClicked(int pos);
     }
 }

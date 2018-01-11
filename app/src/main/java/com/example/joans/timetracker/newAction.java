@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -27,8 +28,8 @@ public class newAction extends AppCompatActivity {
         int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
 
         Button cancelButt = (Button) findViewById(R.id.cancelButton);
-        RadioButton projectButton = (RadioButton) findViewById(R.id.projectButt);
-        RadioButton taskButton = (RadioButton) findViewById(R.id.taskButton);
+        final RadioButton projectButton = (RadioButton) findViewById(R.id.projectButt);
+        final RadioButton taskButton = (RadioButton) findViewById(R.id.taskButton);
         final LinearLayout maxDurLay = (LinearLayout) findViewById(R.id.maxDurLay);
         final LinearLayout repeatLayout = (LinearLayout) findViewById(R.id.repeatLayout);
         final LinearLayout from = (LinearLayout) findViewById(R.id.from);
@@ -43,6 +44,37 @@ public class newAction extends AppCompatActivity {
         final Button viernes = (Button) findViewById(R.id.viernes);
         final Button sabado = (Button) findViewById(R.id.sabado);
         final Button domingo = (Button) findViewById(R.id.domingo);
+
+        Button accept = (Button) findViewById(R.id.acceptButton);
+
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(projectButton.isChecked()) {
+                    EditText projectName = (EditText) findViewById(R.id.nameInput);
+                    EditText projectDescription = (EditText) findViewById(R.id.descInput);
+
+                    Intent dades = new Intent("afegirProjecte");
+                    dades.putExtra("projectName", projectName.getText().toString());
+                    dades.putExtra("projectDescription", projectDescription.getText().toString());
+                    sendBroadcast(dades);
+
+                    Intent intent = new Intent(newAction.this, LlistaActivitatsActivity.class);
+                    startActivity(intent);
+                } else if(taskButton.isChecked()) {
+
+                    EditText taskName = (EditText) findViewById(R.id.nameInput);
+                    EditText taskDescription = (EditText) findViewById(R.id.descInput);
+                    Intent dades = new Intent("afegirTasca");
+                    dades.putExtra("tascaName", taskName.getText().toString());
+                    dades.putExtra("tascaDescription", taskDescription.getText().toString());
+                    sendBroadcast(dades);
+                    Intent intent = new Intent(newAction.this, LlistaActivitatsActivity.class);
+                    startActivity(intent);
+
+                }
+            }
+        });
 
         cancelButt.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -307,6 +307,9 @@ public class GestorArbreActivitats extends Service implements Actualitzable {
         filter.addAction(LlistaActivitatsActivity.DESA_ARBRE);
         filter.addAction(LlistaActivitatsActivity.PARA_SERVEI);
         filter.addAction(LlistaIntervalsActivity.PUJA_NIVELL);
+        filter.addAction("afegirProjecte");
+        filter.addAction("afegirTasca");
+
         receptor = new Receptor();
         registerReceiver(receptor, filter);
 
@@ -492,6 +495,12 @@ public class GestorArbreActivitats extends Service implements Actualitzable {
                 activitatPareActual = activitatClicada;
             } else if (accio.equals(LlistaActivitatsActivity.PARA_SERVEI)) {
                 paraServei();
+            } else if(accio.equals("afegirProjecte")) {
+                Projecte projecteActual =  ((Projecte) activitatPareActual);
+                Projecte p = new Projecte(intent.getStringExtra("projectName").toString(), intent.getStringExtra("projectDescription").toString(), projecteActual);
+            } else if(accio.equals("afegirTasca")) {
+                Projecte projecteActual =  ((Projecte) activitatPareActual);
+                Tasca t = new Tasca(intent.getStringExtra("tascaName").toString(), intent.getStringExtra("tascaDescription").toString(), projecteActual);
             } else {
                 Log.d(tag, "accio desconeguda!");
             }

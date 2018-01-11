@@ -73,7 +73,8 @@ public class Tasca extends Activitat {
 		if (isCronometreEngegat()) { // pre-condicio : la tasca s'esta cronometrant
 			cronometreEngegat = false;
 			Interval ultimInterval = this.intervalsToArray()[this.intervalsSize() - 1];
-			rellotge.deleteObserver(ultimInterval);
+			ultimInterval.stopInterval();
+			//rellotge.deleteObserver(ultimInterval);
 			// no cal actualitzar data final i durada de tasca perque ja ho
 			// haura ordenat update() d'interval
 		}

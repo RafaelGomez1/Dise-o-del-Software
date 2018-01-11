@@ -5,4 +5,5 @@
     <color name="colorBackground">#37474F</color> <!-- Color del fondo -->
     <color name="colorAccent">#ECEFF1</color>
     <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
 </resources>
