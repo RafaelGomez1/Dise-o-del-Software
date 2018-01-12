@@ -16,6 +16,10 @@ public class newAction extends AppCompatActivity {
     private boolean l = false, m= false, x=false, j= false, v= false, s= false ,d = false;
 
     @Override
+
+    /***
+     * Gestión de los botones, como por ejemplo la exclusión mutua en botones de tipo radio
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_action);

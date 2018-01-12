@@ -40,13 +40,14 @@ public class ProjectCreator extends AppCompatActivity {
     public final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_action);
-
-
     }
-    //Funcion que inicializa la barra personalizada
 
 
-    //Funcion de guardar el proyecto y redireccionamiento al llistActivitats
+    /**
+     * Guarda el proyecto y como llegar a llistActivitats
+     * @param item Proyecto
+     * @return Booleano si no ha habido problemas
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

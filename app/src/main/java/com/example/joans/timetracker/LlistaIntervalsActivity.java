@@ -68,8 +68,7 @@ public class LlistaIntervalsActivity extends AppCompatActivity {
     private int layoutID = R.layout.textview_llista_intervals;
 
     /**
-     * Nom de la classe per fer aparèixer als missatges de logging del LogCat.
-     *
+     * Nom de la classe per fer aparèixer als missatges de logging del LogCat
      * @see Log
      */
     private final String tag = this.getClass().getSimpleName();
@@ -158,7 +157,6 @@ public class LlistaIntervalsActivity extends AppCompatActivity {
                 intervaladapter.setItems(llistaDadesInter);
                 intervaladapter.notifyDataSetChanged();
             }
-            Log.i(tag, "final de onReceive LlistaIntervals");
         }
     }
 
@@ -183,7 +181,7 @@ public class LlistaIntervalsActivity extends AppCompatActivity {
      */
     @Override
     public final void onResume() {
-        Log.i(tag, "onResume intervals");
+        Log.i(tag, "Resumint... ");
 
         IntentFilter filter;
         filter = new IntentFilter();
@@ -192,7 +190,7 @@ public class LlistaIntervalsActivity extends AppCompatActivity {
         registerReceiver(receptor, filter);
 
         sendBroadcast(new Intent(LlistaIntervalsActivity.DONAM_FILLS));
-        Log.d(tag, "enviat intent DONAM_FILLS");
+        Log.d(tag, "Level down");
 
         super.onResume();
     }
@@ -203,7 +201,7 @@ public class LlistaIntervalsActivity extends AppCompatActivity {
      */
     @Override
     public final void onPause() {
-        Log.i(tag, "onPause intervals");
+        Log.i(tag, "Pausant...");
 
         unregisterReceiver(receptor);
 

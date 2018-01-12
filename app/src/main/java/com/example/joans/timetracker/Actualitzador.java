@@ -94,14 +94,13 @@ public class Actualitzador extends Handler {
      * milisegons i amb aquest període.
      */
     public final void engega() {
-        if (!enMarxa) { // si no estava ja engegat
+        if (!enMarxa) {
             enMarxa = true;
             mHandler.postDelayed(mUpdateTimeTask, delayMillis);
-            // així comença el cicle d'enviar i gestionar callbacks
-            Log.d(tag, "handler de " + propietari + " engegat");
+            Log.d(tag, "HANDLER " + propietari + " ON");
         } else {
-            Log.d(tag, "engegat handler de " + propietari
-                    + " que ja ho estava");
+            Log.d(tag, "ON HANDLER " + propietari
+                    + "ALREADY ON");
         }
     }
 
@@ -111,15 +110,10 @@ public class Actualitzador extends Handler {
      */
      private Runnable mUpdateTimeTask = new Runnable() {
         public void run() {
-            Log.d(tag, "entro a run() d'actualitzador de " + propietari);
-            // continuem el cicle
             if (enMarxa) {
-                Log.d(tag, "i actualitzo");
                 mHandler.removeCallbacks(mUpdateTimeTask);
                 actualitzable.actualitza();
                 mHandler.postDelayed(mUpdateTimeTask, delayMillis);
-            } else {
-                Log.d(tag, "pero no faig res");
             }
         }
     };
@@ -129,12 +123,12 @@ public class Actualitzador extends Handler {
       * invocació de {@link #engega}.
       */
     public final void para() {
-        if (enMarxa) { // si ja estava engegat
+        if (enMarxa) {
             enMarxa = false;
             mHandler.removeCallbacks(mUpdateTimeTask);
-            Log.d(tag, "handler pausat");
+            Log.d(tag, "HANDLER OFF");
         } else {
-            Log.d(tag, "pausat el handler que ja ho estava");
+            Log.d(tag, "HANDLER ALREADY OFF");
         }
     }
 

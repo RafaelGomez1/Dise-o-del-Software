@@ -16,6 +16,11 @@ public class MainActivity extends AppCompatActivity {
     private boolean taskSelected = false;
 
     @Override
+
+    /**
+     * Gestió de la pagina principal, en la que es configura el comportament
+     * dels elements, com ara l'exclusió mútua dels botons radio
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

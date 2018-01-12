@@ -32,8 +32,6 @@ public class DadesActivitat implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    // TODO : passar tots els atributs a private i fer els corresponents
-    // getters.
 
     /**
      * @see Activitat
@@ -76,24 +74,22 @@ public class DadesActivitat implements Serializable {
     private long segons;
 
     /**
-     * Per tal d'identificar el tipus d'activitat en la interfase d'usuari.
+     * Identificació de projecte.
      */
     private boolean isProjecte;
 
     /**
-     * Per tal d'identificar el tipus d'activitat en la interfase d'usuari.
+     * Identificació de tasca.
      */
     private boolean isTasca;
 
     /**
-     * La interfase d'usuari ho necessita saber per denotar-ho i també per
-     * adequar la interacció (per exemple, no hauria de deixar cronometrar una
-     * tasca que ja ho està sent).
+     * Saber si el cronometre està engegat, per tal d'adequar el seu comportament
      */
     private boolean isCronometreEngegat = false; // nomes te sentit per tasques
 
     /**
-     * Extreu les dades de la activitat passada per paràmetre i les copia als
+     * Treu les dades de la activitat anterior i les copia als
      * atributs propis.
      *
      * @param act

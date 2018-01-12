@@ -22,14 +22,17 @@ public class IntervalAdapter extends RecyclerView.Adapter<IntervalAdapter.Interv
     public IntervalAdapter() {
         intervalos = new ArrayList<>();
     }
-    //
     @Override
     public IntervalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new IntervalViewHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.interval_adapter, parent, false));
     }
 
-    //Función que fija las imagenes a las actividades y atributos correspondientes
+    /**
+     * Función que fija las imagenes a las actividades y atributos correspondientes
+     * @param holder Holder
+     * @param position Actividad correspondiente
+     */
     @Override
     public void onBindViewHolder(final IntervalViewHolder holder, final int position) {
         final DadesInterval dadesInterval = intervalos.get(position);
@@ -46,7 +49,6 @@ public class IntervalAdapter extends RecyclerView.Adapter<IntervalAdapter.Interv
         }
 
 */
-
         if(dadesInterval.getState()) {
             holder.imagenIntervalo.setImageDrawable(ContextCompat.getDrawable(holder.itemView.getContext(), R.mipmap.runinte));
         } else {
@@ -76,22 +78,15 @@ public class IntervalAdapter extends RecyclerView.Adapter<IntervalAdapter.Interv
     public void setItems(ArrayList<DadesInterval> intervalos) {
         this.intervalos = intervalos;
     }
-/*
-    //Referenciamos el click del item de la lista al del adaptador
-    public void setOnTascaClickedListener(OnTascaClickedListener onTascaClickedListener) {
-        this.onTascaClickedListener = onTascaClickedListener;
-    }*/
 
-    //Items del adaptador de actividades
+    /**
+     * Items del adapter personalizado
+     */
     public class IntervalViewHolder extends RecyclerView.ViewHolder {
-
-
         TextView horaInicial;
         TextView horaFinal;
         ImageButton imagenIntervalo;
         TextView duracion;
-
-
 
         public IntervalViewHolder(View itemView) {
             super(itemView);
@@ -99,7 +94,6 @@ public class IntervalAdapter extends RecyclerView.Adapter<IntervalAdapter.Interv
             horaInicial = (TextView) itemView.findViewById(R.id.horaInitView);
             horaFinal = (TextView) itemView.findViewById(R.id.horaFinalView);
             duracion = (TextView) itemView.findViewById(R.id.duradaView);
-
         }
     }
 

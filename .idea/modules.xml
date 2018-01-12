@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Software-Design.iml" filepath="$PROJECT_DIR$/Software-Design.iml" />
+      <module fileurl="file://C:\Users\sbach\Desktop\TimeTracker\Software-Design.iml" filepath="C:\Users\sbach\Desktop\TimeTracker\Software-Design.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TimeTracker.iml" filepath="$PROJECT_DIR$/TimeTracker.iml" />
       <module fileurl="file://C:\Users\Rafa\Desktop\TQS\Software-Design\TimeTracker.iml" filepath="C:\Users\Rafa\Desktop\TQS\Software-Design\TimeTracker.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

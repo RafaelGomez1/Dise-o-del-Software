@@ -28,7 +28,10 @@ public class AdapterActivity extends RecyclerView.Adapter<AdapterActivity.TascaV
                 .inflate(R.layout.activity_adapter, parent, false));
     }
 
-    //Función que fija las imagenes a las actividades y atributos correspondientes
+    /**
+     * Función que fija las imagenes a las actividades, dependiendo si son proyecto,
+     * tarea, si está corriendo o no.
+      */
     @Override
     public void onBindViewHolder(final TascaViewHolder holder, final int position) {
         final DadesActivitat dadesActivitat = items.get(position);
@@ -86,26 +89,26 @@ public class AdapterActivity extends RecyclerView.Adapter<AdapterActivity.TascaV
         this.items = items;
     }
 
-    //Referenciamos el click del item de la lista al del adaptador
+    /**
+     * Linkeamos evento del item de la lista al del adaptador
+     * @param onTascaClickedListener Evento click
+     */
     public void setOnTascaClickedListener(OnTascaClickedListener onTascaClickedListener) {
         this.onTascaClickedListener = onTascaClickedListener;
     }
 
-    //Items del adaptador de actividades
+    /**
+     * Cambia los datos por los introducidos
+     */
     public class TascaViewHolder extends RecyclerView.ViewHolder {
-
-
         TextView tascaTitol;
         ImageButton tascaPlay;
         ImageButton tascaSettings;
         ImageButton typeButton;
         TextView tascaTimer;
 
-
-
         public TascaViewHolder(View itemView) {
             super(itemView);
-
             tascaSettings = (ImageButton) itemView.findViewById(R.id.settingsButt);
             typeButton = (ImageButton) itemView.findViewById(R.id.typeButton);
             tascaPlay = (ImageButton) itemView.findViewById(R.id.imageButton);
