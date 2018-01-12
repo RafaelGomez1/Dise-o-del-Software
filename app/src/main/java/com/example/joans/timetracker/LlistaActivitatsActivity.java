@@ -292,6 +292,17 @@ public class LlistaActivitatsActivity extends AppCompatActivity implements Adapt
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         llistaDadesActivitats = new ArrayList<DadesActivitat>();
         ImageButton addButton = (ImageButton) findViewById(R.id.addButt);
+        ImageButton report = (ImageButton) findViewById(R.id.reportButt);
+
+        assert report != null;
+        report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LlistaActivitatsActivity.this, reportMenu.class);
+                startActivity(intent);
+
+            }
+        });
 
 
 
